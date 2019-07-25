@@ -1,0 +1,246 @@
+<html>
+  <head>
+  <style>
+  body {
+    font-family: Arial;
+}
+.question {
+    margin-bottom: 60px;
+}
+.question .description {
+    font-size: 18px;
+}
+
+/********************************
+ * QUESTION 5.
+ *******************************/
+.q5-wrapper {
+    background: #EFEFEF;
+    width: 250px;
+}
+.q5-wrapper .q5-block {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background: #333;
+}
+
+.q5-block {
+  display: inline-block;
+}
+.q5-block:nth-child(odd) {
+    background: #00FF00;
+}
+
+/* Add your code after this line */
+
+
+/********************************
+ * QUESTION 6.
+ *******************************/
+/* Add your code after this line */
+
+header{
+  background: #F00;
+  color: #FFF;
+  text-align: center;
+}
+
+.file-name {
+  color: #00F;
+  font-weight: bold;
+}
+
+#my-name {
+  text-transform: uppercase;
+}
+
+  </style>
+  <script>
+  /**
+ * Note: jQuery is already included.
+ */
+
+
+/********************************
+ * QUESTION 1.
+ *******************************/
+function executeQ1() {
+  // Answer goes here.
+  var el = document.getElementById('my-name');
+  el.innerHTML = 'Roberto';
+}
+
+/********************************
+ * QUESTION 2.
+ *******************************/
+var listItems = [
+  'Settings',
+  'Customer Support',
+  'On Demand',
+  'Search',
+  'Widgets'
+];
+
+function executeQ2() {
+  // Answer goes here.
+  var elList = document.getElementById('q2-list');
+  for (var item of listItems){
+    var elLi = document.createElement('li');
+    elLi.innerHTML = item;
+     elList.appendChild(elLi)
+  }
+}
+
+/********************************
+ * QUESTION 3.
+ *******************************/
+function Person() {
+  var name = '';
+
+  this.setName = function(n) {
+    name = n;
+  };
+
+  this.getName = function() {
+    return name;
+  };
+  
+  this.getElement = function() {
+    var el = document.createElement('li');
+    el.innerHTML = this.getName();
+    return el;
+  }
+}
+
+function executeQ3() {
+  // Answer goes here.
+  var scott = new Person();
+  scott.setName('scott');
+  var matt = new Person();
+  matt.setName('matt');
+  
+  var elList = document.getElementById('q3-list');
+  elList.appendChild(scott.getElement());
+  elList.appendChild(matt.getElement());
+}
+
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
+
+/********************************
+ * QUESTION 4.
+ *******************************/
+function executeQ4() {
+  var fileURL = 'https://hydracdn.frontiertv.com/widgets/common/ch131images.json';
+  
+  // Save image IDs in the data array.
+  var data = [];
+  
+  // Get the data in fileURL using AJAX, process the reponse and add it to the HTML.
+    
+  $.ajax({
+    method: "GET",
+    url: fileURL,
+    dataType: 'json'
+  }).done(function( data ) {
+    var keys = data.images;
+    var result = '';
+    for (var key in keys){
+       result+=',"'+key+'"';
+    }
+    result +=']';
+    result= replaceAt(result, 0, '[');
+    
+    document.getElementById('q4-answer').innerHTML = result;
+  });
+  
+}
+  </script>
+    <script>
+      function onLoadHandler() {
+        executeQ1();
+        executeQ2();
+        executeQ3();
+        executeQ4();
+      }
+    </script>
+  </head>
+  <body onload="onLoadHandler()">
+    <header>
+      <h1>Frontier Communications</h1>
+    </header>
+    <div class="header">
+      <h2>Javascript/CSS Interview Test</h2>
+    </div>
+    <div class="wrapper">
+      <div class="description">
+        <p>Please answer the following questions in the Javascript or CSS section depending on its topic.</p>
+        <p>Each Javascript question has a function that will get triggered on which you can add your answer or initialize any process you want. For each question you should update only the section that is meant for it.</p>
+        <br/>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>1. Updating only <span class="file-name">executeQ1</span> function make it display your name in the following line:</p>
+        </div>
+        <div class="answer">
+          <p>Hello, my name is <span id="my-name"></span></p>
+        </div>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>2. Given the array <span class="variable-name">listItems</span> defined in the Question 2 section, update <span class="file-name">executeQ2</span> function to display each element as an item in the following list:</p>
+        </div>
+        <div class="answer">
+          <ol id="q2-list"></ol>
+        </div>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>3. Given the <span class="variable-name">Person</span> class in the Question 3 section,  update <span class="file-name">executeQ3</span> function, create two instances and give the name "Scott" to the first one and "Matt" to the second one. Then display their names in the following list:</p>
+        </div>
+        <div class="answer">
+          <ul id="q3-list"></ul>
+        </div>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>4. Get the content of <span class="file-name">https://hydracdn.frontiertv.com/widgets/common/ch131images.json</span> and use it to create an array that will have the keys of all images. Display the array in the "#q4-answer" div using JSON stringify.</p>
+          <p>The answer should look like the following:</p>
+          <div class="answer-example">["18078","18079","18108","18109","18117","18118","18125","18127","18129","45116","45235","45236","fios-sd-still"]</div>
+        </div>
+        <div class="answer">
+          <div id="q4-answer"></div>
+        </div>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>5. Using <span class="file-name">css/question5.css</span> style the following blocks to be on a 3x2 grid having the grey background cover all of them.</p>
+          <p>Also, update the CSS to make odd blocks (1, 3, 5) to be green (#00FF00) instead.</p>
+        </div>
+        <div class="answer">
+          <div class="q5-wrapper">
+            <div class="q5-block"></div>
+            <div class="q5-block"></div>
+            <div class="q5-block"></div>
+            <div class="q5-block"></div>
+            <div class="q5-block"></div>
+            <div class="q5-block"></div>
+          </div>
+        </div>
+      </div>
+      <div class="question">
+        <div class="description">
+          <p>6. Using <span class="file-name">css/question6.css</span> to style this page as follows:</p>
+          <ul>
+            <li>Header should be red (#F00) with white (#FFF) text aligned to the center.</li>
+            <li>Make all file names (class "file-name") to be blue (#00F) and bold.</li>
+            <li>Make your name to display all in uppercase.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
